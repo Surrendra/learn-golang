@@ -1,4 +1,4 @@
-package ProductController
+package controllers
 
 import (
 	"example/todo_go/models"
@@ -9,10 +9,24 @@ import (
 	"gorm.io/gorm"
 )
 
-func Index(c *gin.Context) {
+type ProductController interface {
+	Index(ctx *gin.Context)
+	Show(ctx *gin.Context)
+	Store(ctx *gin.Context)
+	Update(ctx *gin.Context)
+	Delete(ctx *gin.Context)
+}
+
+type productcontroller struct{}
+
+func NewProductController() ProductController {
+	return &productcontroller{}
+}
+
+func Index(ctx *gin.Context) {
 	var product []models.Product
 	models.DB.Find(&product)
-	c.JSON(http.StatusOK, gin.H{"data": product})
+	ctx.JSON(http.StatusOK, gin.H{"data": product})
 }
 
 func Show(c *gin.Context) {

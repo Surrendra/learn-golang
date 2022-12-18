@@ -1,7 +1,6 @@
 package main
 
 import (
-	"example/todo_go/controllers/ProductController"
 	"example/todo_go/models"
 
 	"github.com/gin-gonic/gin"
